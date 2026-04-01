@@ -8,7 +8,11 @@ def main():
 	Reader = Reader_files()
 	Reader.Read_file(sys.argv[1])
 	print("PRINT CONTENTS OF SYS.ARGV: Res.data")
-	print(Reader.data)
+	print(Reader.raw_data)
+	# print("PRINT CONTENTS OF SYS.ARGV: Res.data1")
+	# print(Reader.raw_data[0])
+	print("PRINT CONTENTS OF SYS.ARGV: Res.HEADER")
+	print(Reader.header)
 	# try:
 	# 	question1 = input("Would you like Estimate Price (write EP) or Train Model (TM)? ")
 	# 	if question1 == "EP":
