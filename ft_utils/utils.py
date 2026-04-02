@@ -33,4 +33,9 @@ class Reader_files:
 			return True
 		except ValueError:
 			return False
-
+		
+	def get_header(self) -> list[str]:
+		return self.header
+	
+	def get_raw_data(self) -> list[float]:
+		return self.raw_data
