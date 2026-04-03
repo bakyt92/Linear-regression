@@ -9,6 +9,9 @@ class Training:
 	
 	def ft_train(self, link_file):
 		try:
+			learning_rate = 0.1
+			epoch = 100
+
 			Reader = utils.Reader_files()
 			Reader.Read_file(link_file)
 			
@@ -27,9 +30,48 @@ class Training:
 			res[counter] /= len(data)
 			counter += 1
 		return res
-
 	
-	def ft_msq(self, headers: list[str], data: list[float]) -> float:
+	def gradient_intercept(self, headers: list[str], data: list[float]) -> float:
+		try:
+			res = 0
+			intercept = self.bias
+			weight = self.slope
+			size = len(headers)
+			if size != 2:
+				raise(ValueError)
+			index_price = headers.index("price")
+			index_km = headers.index("km")
+			for rows in data:
+				res = (rows[index_price] - (rows[index_km] * weight + intercept)) + res
+			res /= len(data) 
+			res *= -2
+			return res
+		except Exception as e:
+			print(f"Exception: {e}")
+			sys.exit(1)
+
+
+	def gradient_slope(self, headers: list[str], data: list[float]) -> float:
+		try:
+			res = 0
+			intercept = self.bias
+			weight = self.slope
+			size = len(headers)
+			if size != 2:
+				raise(ValueError)
+			index_price = headers.index("price")
+			index_km = headers.index("km")
+			for rows in data:
+				res = (rows[index_price] - (rows[index_km] * weight + intercept)) * weight + res
+			res /= len(data) 
+			res *= -2
+			return res
+		except Exception as e:
+			print(f"Exception: {e}")
+			sys.exit(1)
+
+
+	def ft_mse(self, headers: list[str], data: list[float]) -> float:
 		try:
 			res = 0
 			mean_val = self.ft_mean(headers, data)
@@ -44,3 +86,9 @@ class Training:
 		except Exception as e:
 			print(f"Exception: {e}")
 			sys.exit(1)
+	
+	def gradient_descent(self) -> float:
+		intercept = self.bias
+		weight = self.slope
+
+		return
