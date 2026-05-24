@@ -6,7 +6,11 @@ from ft_utils.utils import Reader_files
 
 def main():
 	Reader = Reader_files()
-	Reader.Read_file(sys.argv[1])
+	try:
+		Reader.Read_file(sys.argv[1])
+	except Exception as e:
+		print(f"Error: {e}")
+		sys.exit(1)
 	print("PRINT CONTENTS OF SYS.ARGV: Res.data")
 	print(Reader.raw_data)
 	# print("PRINT CONTENTS OF SYS.ARGV: Res.data1")
@@ -24,7 +28,7 @@ def main():
 	# except Exception as e:
 	# 	print("Error {e}")
 	# 	sys.exit(1)
-	
+
 	return
 
 
