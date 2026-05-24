@@ -4,7 +4,7 @@ class Reader_files:
 	def __init__(self):
 		self.header = []
 		self.raw_data = []
-		return 
+		return
 
 	def Read_file(self, link_file):
 		try:
@@ -26,6 +26,12 @@ class Reader_files:
 			print(f"Exception: {e}")
 			sys.exit(1)
 		return
+
+	def get_data(self):
+		if self:
+			return self.header, self.raw_data
+		else:
+			return 0
 
 	def isfloat(self, num):
 		try:
