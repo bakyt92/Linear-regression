@@ -7,5 +7,8 @@ class Training:
         self.theta1 = 0
         return
 
-    def ft_training(self):
-        
+    def ft_training(self, headers, data):
+        estimate_price = 
+
+    def ft_iteration(self, headers, data):
+
