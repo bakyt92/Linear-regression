@@ -24,7 +24,7 @@ def main():
 		else:
 			raise ValueError("wrong input")
 	except Exception as e:
-		print("Error {e}")
+		print(f"Error {e}")
 		sys.exit(1)
 
 
