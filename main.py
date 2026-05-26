@@ -19,7 +19,6 @@ def main():
 			headers, data = Reader.get_data()
 			trainer = Training()
 			trainer.ft_training(headers, data)
-			train_res = ft_train(headers, data)
 		else:
 			raise ValueError("wrong input")
 	except Exception as e:
