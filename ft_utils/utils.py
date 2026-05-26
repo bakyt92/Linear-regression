@@ -28,10 +28,9 @@ class Reader_files:
 		return
 
 	def get_data(self):
-		if self:
-			return self.header, self.raw_data
-		else:
-			return 0
+		if not self.header or not self.raw_data:
+			raise ValueError("Data from file is not available")
+		return self.header, self.raw_data
 
 	def isfloat(self, num):
 		try:

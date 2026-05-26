@@ -1,6 +1,6 @@
 import sys
 from ft_est_price.ft_estimate import ft_estimate
-from ft_train.ft_train import ft_train
+from ft_train.ft_train import Training
 from ft_utils.utils import Reader_files
 
 
@@ -17,6 +17,8 @@ def main():
 				print(f"Error: {e}")
 				sys.exit(1)
 			headers, data = Reader.get_data()
+			trainer = Training()
+			trainer.ft_training(headers, data)
 			train_res = ft_train(headers, data)
 		else:
 			raise ValueError("wrong input")
