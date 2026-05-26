@@ -12,6 +12,7 @@ class Reader_files:
 				for index, line in enumerate(file):
 					line_split = line.split(",")
 					line_split = [re.sub("\n", "", val) for val in line_split]
+					line_split = [val.strip() for val in line_split]
 					if index == 0:
 						self.header = line_split
 						header_size = len(self.header)
