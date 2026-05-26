@@ -1,5 +1,4 @@
 import sys
-from ..ft_utils import ft_utils
 
 class Training:
     epochs = 1000

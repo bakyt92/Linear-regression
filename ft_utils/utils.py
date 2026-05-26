@@ -23,7 +23,7 @@ class Reader_files:
 						else:
 							continue
 		except Exception as e:
-			print(f"Exception: {e}")
+			print(f"Exception in Read_File: {e}")
 			sys.exit(1)
 		return
 

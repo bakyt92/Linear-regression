@@ -13,7 +13,8 @@ def main():
 		elif question1 == "TM":
 			Reader = Reader_files()
 			try:
-				Reader.Read_file(sys.argv[1])
+				file_link = input(f"Enter the name of input file: ")
+				Reader.Read_file(file_link)
 			except Exception as e:
 				print(f"Error: {e}")
 				sys.exit(1)
