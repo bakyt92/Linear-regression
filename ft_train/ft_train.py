@@ -18,10 +18,18 @@ class Training:
         price_index = self.header.index('price')
         km_index = self.header.index('km')
         error_all = []
+        error_all_mileage = []
         for x in data:
             estimated_price = self.theta0 + self.theta1 * x[km_index]
             actual_price = x[price_index]
             error_step = estimated_price - actual_price
-            error_all.append(error_step)
-        
-
+            error_all.append(float(error_step))
+            error_all_mileage.append(float(error_step * x[km_index]))
+        gradient_theta0 = sum(error_all) / len(error_all)
+        gradient_theta1 = sum(error_all_mileage) / len(error_all_mileage)
+        tmp_theta0 = self.theta0 - (Training.learning_rate * gradient_theta0)
+        tmp_theta1 = self.theta1 - (Training.learning_rate * gradient_theta1)
+        self.theta0 = tmp_theta0
+        self.theta1 = tmp_theta1
+        return
+    
