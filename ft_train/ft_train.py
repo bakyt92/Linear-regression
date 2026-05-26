@@ -1,8 +1,8 @@
 import sys
 
 class Training:
-    epochs = 100
-    learning_rate = 0.01
+    epochs = 100000
+    learning_rate = 0.0001
 
     def __init__(self):
         self.theta0 = 0
@@ -15,8 +15,8 @@ class Training:
             learn_step += 1
             print(f"Learning: Step # {learn_step}; theta0 = {self.theta0}; theta1 = {self.theta1}.")
         with open("result.csv", "w") as file:
-            file.write("theta0, theta1")
-            file.write(str(self.theta0) + ", " + str(self.theta1))
+            file.write("theta0, theta1\n")
+            file.write(str(self.theta0) + ", " + str(self.theta1) + "\n")
 
     def ft_iteration(self, headers, data):
         price_index = headers.index('price')
@@ -24,7 +24,7 @@ class Training:
         error_all = []
         error_all_mileage = []
         for x in data:
-            estimated_price = self.theta0 + self.theta1 * x[km_index]
+            estimated_price = self.theta0 + self.theta1 * x[km_index] / 1000
             actual_price = x[price_index]
             error_step = estimated_price - actual_price
             error_all.append(float(error_step))

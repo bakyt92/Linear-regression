@@ -5,6 +5,10 @@ class Estimate:
 		self.theta0 = 0
 		self.theta1 = 0
 
-	def ft_estimate(self):
-		pass
-		return
+	def ft_estimate(self, entered_km, headers, data):
+		theta0_index = headers.index("theta0")
+		self.theta0 = float(data[theta0_index])
+		theta1_index = headers.index("theta1")
+		self.theta1 = float(data[theta1_index])
+		estimate_price = self.theta0 + self.theta1 * entered_km
+		return estimate_price
