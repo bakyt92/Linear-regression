@@ -23,6 +23,7 @@ class Reader_files:
 						# self.raw_data.append(line_split)
 						else:
 							continue
+			file.close()
 		except Exception as e:
 			print(f"Exception in Read_File: {e}")
 			sys.exit(1)

@@ -1,4 +1,5 @@
 import sys
+import math
 
 class Training:
     epochs = 10000000
@@ -17,6 +18,7 @@ class Training:
         with open("result.csv", "w") as file:
             file.write("theta0, theta1\n")
             file.write(str(self.theta0) + ", " + str(self.theta1) + "\n")
+            file.close()
 
     def ft_iteration(self, headers, data):
         price_index = headers.index('price')
@@ -33,6 +35,12 @@ class Training:
         gradient_theta1 = sum(error_all_mileage) / len(error_all_mileage)
         tmp_theta0 = self.theta0 - (Training.learning_rate * gradient_theta0)
         tmp_theta1 = self.theta1 - (Training.learning_rate * gradient_theta1)
+        if math.isnan(tmp_theta0) or math.isnan(tmp_theta1):
+            with open("result.csv", "w") as file:
+                file.write("theta0, theta1\n")
+                file.write(str(self.theta0) + ", " + str(self.theta1) + "\n")
+                file.close()
+                raise ValueError("Iterations are interrupted: theta has reached Nan")
         self.theta0 = tmp_theta0
         self.theta1 = tmp_theta1
         return
