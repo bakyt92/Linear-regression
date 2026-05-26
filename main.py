@@ -1,5 +1,5 @@
 import sys
-from ft_est_price.ft_estimate import ft_estimate
+from ft_est_price.ft_estimate import Estimate
 from ft_train.ft_train import Training
 from ft_utils.utils import Reader_files
 
@@ -8,7 +8,8 @@ def main():
 	try:
 		question1 = input("Would you like Estimate Price (write EP) or Train Model (TM)? ")
 		if question1 == "EP":
-			est_res = ft_estimate()
+			Estimation = Estimate()
+			Estimation.ft_estimate()
 		elif question1 == "TM":
 			Reader = Reader_files()
 			try:

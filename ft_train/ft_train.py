@@ -14,10 +14,10 @@ class Training:
         while learn_step < Training.epochs:
             self.ft_iteration(headers, data)
             learn_step += 1
-            print(f"Learning: Step # {learn_step}; theta0 = {self.theta0}; theta0 = {self.theta1}.")
+            print(f"Learning: Step # {learn_step}; theta0 = {self.theta0}; theta1 = {self.theta1}.")
         with open("result.csv", "w") as file:
             file.write("theta0, theta1")
-            file.write(self.theta0 + ", " + self.theta1)
+            file.write(str(self.theta0) + ", " + str(self.theta1))
 
     def ft_iteration(self, headers, data):
         price_index = self.header.index('price')
