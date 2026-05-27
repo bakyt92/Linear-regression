@@ -34,8 +34,10 @@ def ft_bonus(input_file, result_file):
 		x1 = [minimum_km, maximum_km]
 		y1 = [y_min, y_max]
 		plt.plot(x1, y1, color = "blue", label = "Linear Regression price / mileage")
-		plt.title("Simple line plot")
-		plt.legend(["Real Data", "LR progression"])
+		plt.xlabel("kms x 1000", fontsize=12)
+		plt.ylabel("price in USD", fontsize=12)
+		plt.title("Comparison of calculated and real data")
+		plt.legend(["Real Data", "Calculated LR progression"])
 		plt.grid(True)
 		plt.show()
 	except Exception as e:
