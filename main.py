@@ -25,9 +25,9 @@ def ft_bonus(input_file, result_file):
 		if "price" not in headers or "km" not in headers:
 			raise Exception("Entered file does not contain kms and prices - i.e. no data file")
 		kms_list = [float(row[headers.index('km')]) / 1000 for row in data]
-		print(f"list: {kms_list}")
+		#print(f"list: {kms_list}")
 		prices_list = [float(row[headers.index('price')]) for row in data]
-		print(f"list prices: {prices_list}")
+		#print(f"list prices: {prices_list}")
 		plt.scatter(kms_list, prices_list, color="red", label = "Real Data from CSV")
 		maximum_km = max(kms_list)
 		print(f"Max KMs are: {maximum_km}")
