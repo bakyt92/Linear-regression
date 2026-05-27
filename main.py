@@ -17,11 +17,16 @@ def ft_bonus(input_file, result_file):
 		theta1_index = headers.index("theta1")
 		theta1_plot = float(data[0][theta1_index])
 		Reader_bonus.Read_file(input_file)
+		data.clear()
+		headers.clear()
 		headers, data = Reader_bonus.get_data()
-		maximum_km = max(data[headers.index('km')]) / 1000
+		kms_list = [float(row[headers.index('km')]) for row in data]
+		print(f"list: {kms_list}")
+		#prices_list = [float(row[headers.index('price')]) for row in data]
+		maximum_km = max(kms_list) / 1000
 		print(f"Max KMs are: {maximum_km}")
 		y_max = theta0_plot + theta1_plot * maximum_km
-		minimum_km = min(data[headers.index('km')]) / 1000
+		minimum_km = min(kms_list) / 1000
 		print(f"Min KMs are: {minimum_km}")
 		y_min = theta0_plot + theta1_plot * minimum_km
 		x1 = [minimum_km, maximum_km]
