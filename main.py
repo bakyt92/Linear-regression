@@ -12,6 +12,8 @@ def ft_bonus(input_file, result_file):
 		Reader_bonus = Reader_files()
 		Reader_bonus.Read_file(result_file)
 		headers, data = Reader_bonus.get_data()
+		if "theta0" not in headers or "theta1" not in headers:
+			raise Exception("Entered file does not contain results theta1 / theta0 - i.e. no result file")
 		theta0_index = headers.index("theta0")
 		theta0_plot = float(data[0][theta0_index])
 		theta1_index = headers.index("theta1")
@@ -20,6 +22,8 @@ def ft_bonus(input_file, result_file):
 		headers.clear()
 		Reader_bonus.Read_file(input_file)
 		headers, data = Reader_bonus.get_data()
+		if "price" not in headers or "km" not in headers:
+			raise Exception("Entered file does not contain kms and prices - i.e. no data file")
 		kms_list = [float(row[headers.index('km')]) / 1000 for row in data]
 		print(f"list: {kms_list}")
 		prices_list = [float(row[headers.index('price')]) for row in data]
@@ -65,6 +69,8 @@ def main():
 				print(f"Error: {e}")
 				sys.exit(1)
 			headers, data = Reader.get_data()
+			if "price" not in headers or "km" not in headers:
+				raise Exception("Entered file does not contain kms and prices - i.e. no data file")
 			trainer = Training()
 			trainer.ft_training(headers, data)
 		elif args.command == "estimate":
@@ -72,14 +78,29 @@ def main():
 			Reader = Reader_files()
 			Reader.Read_file(file_link)
 			headers, data = Reader.get_data()
+			if "theta0" not in headers or "theta1" not in headers:
+				raise Exception("Entered file does not contain results theta1 / theta0 - i.e. no result file")
 			Estimation = Estimate()
 			entered_km = 0
-			while entered_km >= 0:
-				entered_km = input(f"Please enter kms for price estimate: ")
-				entered_km = float(entered_km)
-				entered_km /= 1000
-				estimate_price = Estimation.ft_estimate(entered_km, headers, data)
-				print(f"Estimate price is: {estimate_price}")
+			while True:
+				entered_km = input(f"Please enter kms for price estimate (above 1 km. Type exit for exit): ")
+				if entered_km == "exit":
+					print(f"You've entered EXIT command. Good Luck!")
+					break
+				try: 
+					enter_km = float(entered_km)
+				except ValueError:
+					print(f"Entered km is not float or int")
+					continue
+				if enter_km <= 1:
+					print(f"Value is small. Number should be above 1 km.")
+					continue
+				enter_km /= 1000
+				estimate_price = Estimation.ft_estimate(enter_km, headers, data)
+				if estimate_price < 0:
+					print(f"Expected price of car is 0 / no value")
+					continue
+				print(f"Estimate price is: {estimate_price:.2f}")
 		elif args.command == "bonus":
 			ft_bonus(args.input_file, args.result_file)
 		else:
