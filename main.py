@@ -18,8 +18,19 @@ def ft_bonus(input_file, result_file):
 		theta1_plot = float(data[0][theta1_index])
 		Reader_bonus.Read_file(input_file)
 		headers, data = Reader_bonus.get_data()
-		
-
+		maximum_km = max(data[headers.index('km')]) / 1000
+		print(f"Max KMs are: {maximum_km}")
+		y_max = theta0_plot + theta1_plot * maximum_km
+		minimum_km = min(data[headers.index('km')]) / 1000
+		print(f"Min KMs are: {minimum_km}")
+		y_min = theta0_plot + theta1_plot * minimum_km
+		x1 = [minimum_km, maximum_km]
+		y1 = [y_min, y_max]
+		plt.plot(x1, y1, color = "blue", label = "Linear Regression price / mileage")
+		plt.title("Simple line plot")
+		plt.legend(["LR progression"])
+		plt.grid(True)
+		plt.show()
 	except Exception as e:
 		print(f"Exception in Bonus: {e}")
 	return
@@ -48,7 +59,7 @@ def main():
 			trainer = Training()
 			trainer.ft_training(headers, data)
 		elif args.command == "estimate":
-			file_link = input(f"Enter the name of input file: ")
+			file_link = args.result_file
 			Reader = Reader_files()
 			Reader.Read_file(file_link)
 			headers, data = Reader.get_data()
@@ -63,7 +74,7 @@ def main():
 		elif args.command == "bonus":
 			ft_bonus(args.input_file, args.result_file)
 		else:
-			raise ValueError("wrong input")
+			raise ValueError("wrong input. Please use --help command")
 	except Exception as e:
 		print(f"Error {e}")
 		sys.exit(1)
