@@ -2,7 +2,7 @@ import sys
 import math
 
 class Training:
-    epochs = 10000000
+    epochs = 1000000
     learning_rate = 0.0001
 
     def __init__(self):
