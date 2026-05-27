@@ -16,24 +16,26 @@ def ft_bonus(input_file, result_file):
 		theta0_plot = float(data[0][theta0_index])
 		theta1_index = headers.index("theta1")
 		theta1_plot = float(data[0][theta1_index])
-		Reader_bonus.Read_file(input_file)
 		data.clear()
 		headers.clear()
+		Reader_bonus.Read_file(input_file)
 		headers, data = Reader_bonus.get_data()
-		kms_list = [float(row[headers.index('km')]) for row in data]
+		kms_list = [float(row[headers.index('km')]) / 1000 for row in data]
 		print(f"list: {kms_list}")
-		#prices_list = [float(row[headers.index('price')]) for row in data]
-		maximum_km = max(kms_list) / 1000
+		prices_list = [float(row[headers.index('price')]) for row in data]
+		print(f"list prices: {prices_list}")
+		plt.scatter(kms_list, prices_list, color="red", label = "Real Data from CSV")
+		maximum_km = max(kms_list)
 		print(f"Max KMs are: {maximum_km}")
 		y_max = theta0_plot + theta1_plot * maximum_km
-		minimum_km = min(kms_list) / 1000
+		minimum_km = min(kms_list)
 		print(f"Min KMs are: {minimum_km}")
 		y_min = theta0_plot + theta1_plot * minimum_km
 		x1 = [minimum_km, maximum_km]
 		y1 = [y_min, y_max]
 		plt.plot(x1, y1, color = "blue", label = "Linear Regression price / mileage")
 		plt.title("Simple line plot")
-		plt.legend(["LR progression"])
+		plt.legend(["Real Data", "LR progression"])
 		plt.grid(True)
 		plt.show()
 	except Exception as e:
